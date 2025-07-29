@@ -1,5 +1,7 @@
+from sqlalchemy.orm import declarative_base
 from sqlalchemy import Column, String, DateTime, Integer
-from app.db import Base
+
+Base = declarative_base()
 
 class Call(Base):
     __tablename__ = "calls_db"
