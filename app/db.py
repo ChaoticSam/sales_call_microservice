@@ -8,11 +8,11 @@ load_dotenv()
 
 
 def get_database_url(sync: bool = False):
-    user = os.getenv("POSTGRES_USER", "postgres")
-    password = os.getenv("POSTGRES_PASSWORD", "postgres")
-    host = os.getenv("POSTGRES_HOST", "localhost")
-    port = os.getenv("POSTGRES_PORT", "5432")
-    db = os.getenv("POSTGRES_DB", "calls_db")
+    user = os.getenv("POSTGRES_USER")
+    password = os.getenv("POSTGRES_PASSWORD")
+    host = os.getenv("POSTGRES_HOST")
+    port = os.getenv("POSTGRES_PORT")
+    db = os.getenv("POSTGRES_DB")
     
     if sync:
         return f"postgresql://{user}:{password}@{host}:{port}/{db}"
@@ -21,5 +21,5 @@ def get_database_url(sync: bool = False):
 
 DATABASE_URL = os.getenv("DB_URL")
 engine = create_async_engine(DATABASE_URL, echo=True)
-SessionLocal = async_sessionmaker(engine, expire_on_commit=False)
+SessionLocal = async_sessionmaker(engine, expire_on_commit=False, class_=AsyncSession)
 Base = declarative_base()
